@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfTestApplication", "WcfTestApplication\WcfTestApplication.csproj", "{808564B7-40B0-45F7-AF98-DD475E236362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfLogger", "WcfLogger\WcfLogger.csproj", "{D93E06CD-500E-404D-8BF2-600BBBE1EA86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{808564B7-40B0-45F7-AF98-DD475E236362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808564B7-40B0-45F7-AF98-DD475E236362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808564B7-40B0-45F7-AF98-DD475E236362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808564B7-40B0-45F7-AF98-DD475E236362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D93E06CD-500E-404D-8BF2-600BBBE1EA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D93E06CD-500E-404D-8BF2-600BBBE1EA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D93E06CD-500E-404D-8BF2-600BBBE1EA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D93E06CD-500E-404D-8BF2-600BBBE1EA86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
