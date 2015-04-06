@@ -20,10 +20,12 @@ namespace WcfLogger
 		/// Construtor que preenche com a mensagem.
 		/// </summary>
 		/// <param name="message">Mensagem a ser preenchida no argumento do evento.</param>
+		/// <param name="correlation">Indicador para conseguir reuniar mensagem de entrada e saída/</param>
 		/// <param name="isInbound">Indica se é uma mensagem que está sendo recebida. Caso contrário é de saída ou OneWay.</param>
-		public LogEventArgs(string message, bool isInbound)
+		public LogEventArgs(string message, Guid correlation, bool isInbound)
 		{
 			this.Message = message;
+			this.CorrelationId = correlation;
 			this.IsInbound = isInbound;
 		}
 
@@ -36,6 +38,11 @@ namespace WcfLogger
 		/// Indica se o log é de uma mensagem de entrada ou de uma resposta.
 		/// </summary>
 		public bool IsInbound { get; set; }
+
+		/// <summary>
+		/// Identificação de relação entre a mensagem de entrada e saída.
+		/// </summary>
+		public Guid CorrelationId { get; set; }
 	}
 
 	/// <summary>
@@ -69,14 +76,15 @@ namespace WcfLogger
 		/// Verifica e dispara o evento de log.
 		/// </summary>
 		/// <param name="message">mensagem que se quer logar.</param>
+		/// <param name="correlation">Indicador para conseguir reuniar mensagem de entrada e saída/</param>
 		///<param name="isInbound">Indica se é uma mensagem que está sendo recebida. Caso contrário é de saída ou OneWay.</param>
-		private void onMessageLogAvailable(string message, bool isInbound)
+		private void onMessageLogAvailable(string message, Guid correlation, bool isInbound)
 		{
 			var handler = WcfMessageLogger.MessageLogAvailable;
 
 			if (handler != null)
 			{
-				WcfMessageLogger.MessageLogAvailable(this, new LogEventArgs(message, isInbound));
+				WcfMessageLogger.MessageLogAvailable(this, new LogEventArgs(message, correlation, isInbound));
 			}
 		}
 
@@ -92,8 +100,10 @@ namespace WcfLogger
 		public object AfterReceiveRequest(ref Message request, IClientChannel channel,
 			InstanceContext instanceContext)
 		{
-			this.onMessageLogAvailable(request.ToString(), true);
-			return null;
+			var guid = Guid.NewGuid();
+
+			this.onMessageLogAvailable(request.ToString(), guid, true);
+			return guid;
 		}
 
 		/// <summary>
@@ -103,7 +113,7 @@ namespace WcfLogger
 		/// <param name="correlationState">Mensagem de correlação retornado pelo método AfterReceiveRequest.</param>
 		public void BeforeSendReply(ref Message reply, object correlationState)
 		{
-			this.onMessageLogAvailable(reply.ToString(), false);
+			this.onMessageLogAvailable(reply.ToString(), (Guid)correlationState, false);
 		}
 
 		#endregion
