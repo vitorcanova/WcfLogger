@@ -1,7 +1,7 @@
 # WcfLogger
 Event base WCF log to hookup straight to the config file.
 
-You just need to add to your client config
+You just need to add to your config:
 
 	<system.serviceModel>
 		<extensions>
